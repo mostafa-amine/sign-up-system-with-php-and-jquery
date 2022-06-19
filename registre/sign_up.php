@@ -1,7 +1,7 @@
 <?php
 /*
     all checks : 
-    the errors will display on the div
+    the errors will in the there places 
     name = empty
     email = empty - contain @
     password = empty - contain at least 8 cararcters

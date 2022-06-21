@@ -9,6 +9,7 @@ border: 1px solid #e6e6e6;
 padding: 5px;
 text-align: center;
 color: white;
+border-radius: 20px;
 }
 
 .error_message{
@@ -17,34 +18,97 @@ border: 1px solid #e6e6e6;
 padding: 5px;
 text-align: center;
 color: white;
+border-radius: 20px;
 }
 
-.form-horizontal textarea:focus, 
-textarea.form-control:focus, 
-input.form-control:focus, 
-input[type=text]:focus, 
-input[type=password]:focus, 
-input[type=email]:focus, 
-input[type=number]:focus, 
-[type=text].form-control:focus, 
-[type=password].form-control:focus, 
-[type=email].form-control:focus, 
-[type=tel].form-control:focus, 
-[contenteditable].form-control:focus {
-  box-shadow: inset 0 -1px 0 #ddd;
+body{
+background-color: #FBC588;
 }
-.form-horizontal input{
-	border-radius: 0px;
+
+.registration-form{
+padding: 50px 0;
+}
+
+.registration-form form{
+background-color: #fff;
+max-width: 600px;
+margin: auto;
+padding: 50px 70px;
+border-radius: 30px;
+box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+}
+
+.registration-form .form-icon{
+text-align: center;
+background-color: #F99F38;
+border-radius: 50%;
+font-size: 60px;
+color: white;
+width: 100px;
+height: 100px;
+margin: auto;
+margin-bottom: 50px;
+line-height: 80px;
+}
+
+.registration-form .item{
+border-radius: 20px;
+margin-bottom: 25px;
+padding: 10px 20px;
+}
+
+.registration-form .create-account{
+border-radius: 30px;
+padding: 10px 20px;
+font-size: 18px;
+font-weight: bold;
+background-color: #F99F38;
+border: none;
+color: white;
+margin-top: 20px;
+}
+
+.registration-form .social-media{
+max-width: 600px;
+background-color: #F99F38;
+margin: auto;
+padding: 35px 0;
+text-align: center;
+border-bottom-left-radius: 30px;
+border-bottom-right-radius: 30px;
+color: #9fadca;
+border-top: 1px solid #dee9ff;
+box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+}
+
+.registration-form .social-icons{
+margin-top: 30px;
+margin-bottom: 16px;
+}
+
+    
+
+@media (max-width: 576px) {
+.registration-form form{
+padding: 50px 20px;
+}
+
+.registration-form .form-icon{
+width: 70px;
+height: 70px;
+font-size: 30px;
+line-height: 70px;
+}
 }
 
 </style>
 
 
-<div id="success_message" class="container success_message col-6 mt-5 d-none">
+<div id="success_message" class="container success_message col-4 mt-5 d-none">
 	
 </div>
 
-<div id="error_message" class="container error_message col-6 mt-5 d-none">
+<div id="error_message" class="container error_message col-4 mt-5 d-none">
 	
 </div>
 
@@ -54,55 +118,28 @@ input[type=number]:focus,
 </div>
 
 
-<div class="container main_div d-flex justify-content-center">
-<!-- main form div start -->
-<div class="main_form col-6 mt-5">
-<form id="registraion_form" class="form-horizontal">
-					
-	<div class="form-group">
-	<label class="col-sm-3 control-label">Username</label>
-	<div class="col-sm-8">
-	<input type="text" id="txt_username" class="form-control" placeholder="enter username" />
-	</div>
-	</div>
-				
-	<div class="form-group mt-2">
-	<label class="col-sm-3 control-label">Email</label>
-	<div class="col-sm-8">
-	<input type="text" id="txt_email" class="form-control" placeholder="enter email" />
-	</div>
-	</div>
-				
-	<div class="form-group mt-2">
-	<label class="col-sm-3 control-label">Password</label>
-	<div class="col-sm-8">
-	<input type="password" id="txt_password" class="form-control" placeholder="enter password" />
-	</div>
-	</div>
-
-    <div class="form-group mt-2">
-	<label class="col-sm-3 control-label">Confirm Password</label>
-	<div class="col-sm-8">
-	<input type="password" id="txt_password_confirm" class="form-control" placeholder="confirm password" />
-	</div>
-	</div>
-				
-	<div class="form-group mt-2">
-	<div class="col-sm-offset-3 mt-3">
-	<button type="submit" id="btn_register" class="btn btn-success">sign up</button>
-	</div>
-	</div>
-
-</form>
-</div>
-<!-- main form div end -->
-
-<!-- image display start -->
-<div class="image_desc">
-<img src="../../images/sign_up.png" class="img-fluid" width="500" alt="">
-</div>
-<!-- image display end -->
-
+<div class="registration-form">
+    <form id="registraion_form" class="form-horizontal">
+        <div class="form-icon">
+            <span><i class="bi bi-person-plus"></i></span>
+        </div>
+        <div class="form-group">
+            <input type="text" id="txt_username"  class="form-control item" id="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <input type="email" id="txt_email" class="form-control item" id="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <input type="password" id="txt_password" class="form-control item" id="email" placeholder="password">
+        </div>
+        <div class="form-group">
+            <input type="password" id="txt_password_confirm" class="form-control item" id="phone-number" placeholder="Confirm password">
+        </div>
+       
+        <div class="form-group">
+            <button type="submit" id="btn_register" class="btn btn-block create-account">Create Account</button>
+        </div>
+    </form>
 </div>
 
 

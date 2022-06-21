@@ -8,7 +8,6 @@ if(isset($_POST['txt_password'])){
 	$name =htmlspecialchars($_POST['txt_username']);
 
 	$_SESSION['user_name'] = $name;
-
 	$email =htmlspecialchars($_POST['txt_email']);
 	$password =htmlspecialchars($_POST['txt_password']);
 

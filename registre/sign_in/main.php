@@ -6,6 +6,25 @@ session_start();
 ?>
 
 <style>
+.success_message{
+background-color: rgb(0, 220, 0);
+border: 1px solid #e6e6e6;
+padding: 5px;
+text-align: center;
+color: white;
+border-radius: 20px;
+}
+
+.error_message{
+background-color: #FF0000;
+border: 1px solid #e6e6e6;
+padding: 5px;
+text-align: center;
+color: white;
+border-radius: 20px;
+}
+
+
 body{
 background-color: #FBC588;
 }
@@ -126,6 +145,19 @@ else
 </div>
 
 
+<div id="success_message" class="container success_message col-4 mt-5 d-none">
+	
+</div>
+
+<div id="error_message" class="container error_message col-4 mt-5 d-none">
+	
+</div>
+
+<div class="display_div">
+
+</div>
+
+
 <div class="registration-form">
         <form>
             <div class="form-icon">
@@ -140,7 +172,7 @@ else
             </div>
 
             <div class="form-group">
-                <button type="button" class="btn btn-block create-account">Sign in</button>
+                <button id="submit" type="button" class="btn btn-block create-account">Sign in</button>
             </div>
 
             <div class="sign_up mt-3">
@@ -152,20 +184,67 @@ else
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+
+
+<script>
+
+$("#submit").click(function () {
+    // get the user values
+    var email = $("#email").val();
+    var password = $("#password").val();
+
+    var atpos  = email.indexOf('@');
+	var dotpos = email.lastIndexOf('.com');
+
+    // check inputs field 
+    if(email == ''){ //check email not empty
+		$(".error_message").removeClass("d-none").html("please enter email address !!")
+
+	}
+	else if(atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= email.length){ //check valid email format
+		$(".error_message").removeClass("d-none").html("please enter valid email address !!")
+
+	}
+    else if(password == ''){ //check password not empty
+		$(".error_message").removeClass("d-none").html("please enter password !!")
+
+	}
+	else if(password.length <= 6){ //check password value length six 
+		$(".error_message").removeClass("d-none").html("password must contain at least 6 caracters !!")
+
+	} 
+    else{
+        $(".error_message").addClass("d-none")
+        // send data
+        $.post("check_data.php" , {email:email , password:password} , function(data) {
+            $(".display_div").html(data)
+        })
+}
+    
+
+})
+
+</script>
+
+
 <?php
 if(isset($_SESSION['user_name']))
 {
 
     echo "
     <script>
+    $(document).ready(function(){
         $('.sign_up').addClass('d-none');
+    })
     </script>";
 } 
 else 
 {
     echo "
     <script>
-        $('.sign_up').removeClass('d-none');
+    $(document).ready(function(){
+        $('.sign_up').removeClass('d-none');  
+    })
     </script>";
 }
 

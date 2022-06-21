@@ -18,14 +18,38 @@ padding: 5px;
 text-align: center;
 color: white;
 }
+
+.form-horizontal textarea:focus, 
+textarea.form-control:focus, 
+input.form-control:focus, 
+input[type=text]:focus, 
+input[type=password]:focus, 
+input[type=email]:focus, 
+input[type=number]:focus, 
+[type=text].form-control:focus, 
+[type=password].form-control:focus, 
+[type=email].form-control:focus, 
+[type=tel].form-control:focus, 
+[contenteditable].form-control:focus {
+  box-shadow: inset 0 -1px 0 #ddd;
+}
+.form-horizontal input{
+	border-radius: 0px;
+}
+
 </style>
 
 
-<div class="container success_message col-6 mt-5 d-none">
+<div id="success_message" class="container success_message col-6 mt-5 d-none">
 	
 </div>
 
-<div class="container error_message col-6 mt-5 d-none">
+<div id="error_message" class="container error_message col-6 mt-5 d-none">
+	
+</div>
+
+
+<div class="last_display">
 	
 </div>
 
@@ -65,7 +89,7 @@ color: white;
 				
 	<div class="form-group mt-2">
 	<div class="col-sm-offset-3 mt-3">
-	<button type="submit" id="btn_register" class="btn btn-success">Register</button>
+	<button type="submit" id="btn_register" class="btn btn-success">sign up</button>
 	</div>
 	</div>
 
@@ -88,14 +112,52 @@ color: white;
 <script>
 $("#btn_register").click(function (e) {
     e.preventDefault();
-
     // get the data
     var txt_username = $("#txt_username").val();
     var txt_email = $("#txt_email").val();
     var txt_password = $("#txt_password").val();
     var txt_password_confirm = $("#txt_password_confirm").val();
 
-	
+	var atpos  = txt_email.indexOf('@');
+	var dotpos = txt_email.lastIndexOf('.com');
+
+	if(txt_username == ''){ // check username not empty
+		$("#error_message").removeClass("d-none").html("please enter username !!")
+	}
+	else if(!/^[a-z A-Z]+$/.test(txt_username)){ // check username allowed capital and small letters 
+		$(".error_message").html("username only capital and small letters are allowed !!")
+
+	}
+	else if(txt_email == ''){ //check email not empty
+		$(".error_message").removeClass("d-none").html("please enter email address !!")
+
+	}
+	else if(atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= txt_email.length){ //check valid email format
+		$(".error_message").removeClass("d-none").html("please enter valid email address !!")
+
+	}
+	else if(txt_password == ''){ //check password not empty
+		$(".error_message").removeClass("d-none").html("please enter password !!")
+
+	}
+	else if(txt_password.length <= 6){ //check password value length six 
+		$(".error_message").removeClass("d-none").html("password must contain at least 6 caracters !!")
+
+	} 
+	else if(txt_password_confirm !== txt_password){
+
+		$(".error_message").removeClass("d-none").html("The password must be identical")
+	}
+	else{
+		$(".error_message").addClass("d-none");
+
+		$.post("send_data.php" ,{txt_username:txt_username , txt_password:txt_password , txt_email:txt_email} , function (data) {
+			$(".last_display").html(data)
+		})
+		// $("#registraion_form").trigger("reset");
+	}
+
+
 
 
 

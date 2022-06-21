@@ -12,9 +12,9 @@ if(isset($_POST['txt_password'])){
 	$email =htmlspecialchars($_POST['txt_email']);
 	$password =htmlspecialchars($_POST['txt_password']);
 
-	$sql = "SELECT name FROM sign_up where name = ?";
+	$sql = "SELECT name FROM sign_up where email = ?";
 	$statement = $pdo->prepare($sql);
-	$statement->execute([$name]);
+	$statement->execute([$email]);
 	$statement_fetch = $statement->fetchAll(PDO::FETCH_ASSOC);
 	
 	if(count($statement_fetch)>=1){

@@ -2,7 +2,13 @@
 require("../../config/config.php");
 	
 if(isset($_POST['txt_password'])){
+	// i will define a session when he press sign_in
+	session_start();
+
 	$name =htmlspecialchars($_POST['txt_username']);
+
+	$_SESSION['user_name'] = $name;
+
 	$email =htmlspecialchars($_POST['txt_email']);
 	$password =htmlspecialchars($_POST['txt_password']);
 
@@ -30,7 +36,7 @@ if(isset($_POST['txt_password'])){
 		</div>
 		<script>
 		setTimeout(function(){
-			window.location.href = "../sign_in/main.html"; 
+			window.location.href = "../sign_in/main.php"; 
 	   	}, 5000);
 		</script>
 		';
